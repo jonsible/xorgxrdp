@@ -1,0 +1,10 @@
+# yamllint disable rule:line-length
+---
+xorgxrdp:
+  version: 0.2.12
+  package: true
+  source: 
+    contexts: 
+      - prefix: /usr/local
+        owner: root
+        version: 0.2.12

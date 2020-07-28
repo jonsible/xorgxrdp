@@ -1,0 +1,21 @@
+---
+- name: Converge
+  hosts: all
+  vars:
+    xorgxrdp_install_from_source: true
+    xorgxrdp_user_strip: ['user.*']
+    xorgxrdp_user_filter: ['jsch.*']
+    xorgxrdp_source_path: "/opt"
+    xorgxrdp_skel_config: true
+    xorgxrdp_user_install: true
+    xorgxrdp_user_config: true
+  tasks:
+    - name: Creating users
+      become: true
+      user:
+        name: "{{ item }}"
+        shell: /bin/bash
+      loop: ['jscherrer', 'user1', 'user2', 'svc_user', 'svc_user2']
+
+    - include_role:
+        name: xorgxrdp

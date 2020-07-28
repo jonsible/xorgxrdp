@@ -1,0 +1,36 @@
+---
+_name: xorgxrdp
+
+dependencies:
+  run:
+    Archlinux:
+      - base-devel
+    Debian-family:
+      - build-essential
+    RedHat-family:
+      - "@Development Tools"
+  build:
+
+clone:
+  repo: https://github.com/neutrinolabs/xorgxrdp.git
+
+prepare:
+  shell: |
+    ./bootstrap
+
+build:
+  shell: |
+    ./configure \
+    --prefix={{ prefix }} \
+    --enable-ipv6 \
+    make -j4
+
+install:
+  shell: |
+    make install
+  creates: "{{ prefix }}/bin/{{ _name }}"
+
+uninstall:
+  shell: |
+    make uninstall
+  removes: "{{ prefix }}/bin/{{ _name }}"

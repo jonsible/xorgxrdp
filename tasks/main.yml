@@ -1,0 +1,16 @@
+---
+
+- name: Installing xorgxrdp (Package)
+  package:
+    name: xorgxrdp
+  when: xorgxrdp.package
+
+- name: Installing xorgxrdp (Source)
+  include_role:
+    name: jonsible.builder
+  vars:
+    prefix: "{{ item.prefix }}"
+    version: "{{ item.version }}"
+    owner: "{{ item.owner }}"
+  loop: "{{ xorgxrdp.contexts }}"
+  when: xorgxrdp.source is defined

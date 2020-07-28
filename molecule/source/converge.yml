@@ -1,0 +1,21 @@
+---
+- name: Converge
+  hosts: all
+  vars:
+    xorgxrdp_install_from_source: true
+    xorgxrdp_prefix: "/usr/local"
+    xorgxrdp_source_path: "/test/source"
+    xorgxrdp_skel_config: true
+  tasks:
+    - include_role:
+        name: xorgxrdp
+
+    - include_role:
+        name: xorgxrdp
+        apply:
+          tags:
+            - molecule-idempotence-notest
+      vars:
+        xorgxrdp_force_install: true
+      tags:
+        - molecule-idempotence-notest

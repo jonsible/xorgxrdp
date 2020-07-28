@@ -1,0 +1,37 @@
+---
+galaxy_info:
+  role_name: xorgxrdp
+  author: Jonathan Scherrer
+  description: |
+    Role to install xorgxrdp
+
+  license: GPL-3.0-or-later
+
+  min_ansible_version: 2.3
+
+  platforms:
+    - name: Archlinux
+      versions:
+        - any
+    - name: Debian
+      versions:
+        - buster
+    - name: EL
+      versions:
+        - 7
+    - name: Ubuntu
+      versions:
+        - bionic
+
+  galaxy_tags: []
+
+  dependencies:
+    - role: jonsible.builder
+      when: xorgxrdp.source is defined
+
+    - role: jonsible.yay
+      when: ansible_os_family == 'Archlinux'
+
+    - role: jonsible.xrdp
+      vars: { xorgxrdp: { package: true } }
+      when: xorgxrdp.source is defined
